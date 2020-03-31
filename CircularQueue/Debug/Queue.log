@@ -1,0 +1,4 @@
+﻿  test_cua.c
+C:\Users\Josep Bello\OneDrive - URV\GEI\Segon\ED\PR1\Queue\test_cua.c(14,24): warning C4047:  'función': 'int *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\Josep Bello\OneDrive - URV\GEI\Segon\ED\PR1\Queue\test_cua.c(14,24): warning C4024:  'Cap': tipos distintos para el parámetro formal y el parámetro real 2
+  Queue.vcxproj -> C:\Users\Josep Bello\OneDrive - URV\GEI\Segon\ED\PR1\Queue\Debug\Queue.exe
