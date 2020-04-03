@@ -1,0 +1,2 @@
+D:\Uni\OneDrive - URV\GEI\Segon\ED\PR1\DoubleLinkedList\Debug\DoubleLinkedList.exe
+D:\Uni\OneDrive - URV\GEI\Segon\ED\PR1\DoubleLinkedList\Debug\DoubleLinkedList.pdb

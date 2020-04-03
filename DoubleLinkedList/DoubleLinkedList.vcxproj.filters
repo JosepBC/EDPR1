@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="linked.c">
+    <ClCompile Include="test_linked.c">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="test_linked.c">
+    <ClCompile Include="linked_list.c">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

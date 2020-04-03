@@ -1,21 +1,23 @@
 #define SUCCESS 0
 #define ERROR_CREAR 1
 #define ERROR_DESTRUIR 2
-#define CUA_NO_CREADA 3
-#define CUA_BUIDA 4
-#define CUA_PLENA 5
-#define ERROR_INDETERMINAT 6
-
-typedef struct llista_encadenada {
-	int pdi, elems;
-	Node_t first;
-	Node_t last;
-}llista_encadenada;
+#define LLISTA_NO_CREADA 3
+#define LLISTA_BUIDA 4
+#define ELEMENT_NO_CREAT 5
+#define MEMORIA_INSUFICIENT 6
+#define ERROR_INDETERMINAT 7
 
 typedef struct Node_t {
 	int elem;
-	Node_t *next, *previous;
+	struct Node_t *next, *previous;
 }Node_t;
+
+typedef struct llista_encadenada {
+	int elems;
+	Node_t *pdi;
+	Node_t *first;
+	Node_t *last;
+}llista_encadenada;
 
 extern int Crear(llista_encadenada* ll);
 extern int Destruir(llista_encadenada* ll);
@@ -30,3 +32,4 @@ extern int Esborrar(llista_encadenada* ll);
 extern int Longitud(llista_encadenada ll, int* lon);
 extern int Buscar(llista_encadenada ll, int elem, bool* trobat);
 extern int Cost_Buscar(llista_encadenada ll, int elem, int* cost);
+extern int Imprimir_Llista(llista_encadenada ll);
