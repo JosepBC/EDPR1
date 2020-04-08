@@ -21,9 +21,15 @@
     <ClCompile Include="linked_list.c">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="random.c">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="linked_list.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="random.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

@@ -97,7 +97,7 @@ int Inserir(llista_encadenada* ll, int elem) {
 		ll->ghost = (Node_t*)malloc(sizeof(Node_t));
 		if (ll->ghost == NULL) return MEMORIA_INSUFICIENT;
 
-		ll->ghost->elem = NULL;
+		ll->ghost->elem = 0;
 		ll->ghost->previous = NULL;
 		ll->ghost->next = ll->first;
 		ll->first->previous = ll->ghost;
@@ -188,7 +188,7 @@ int Cost_Buscar(llista_encadenada ll, int elem, int* cost) {
 	int i;
 	Node_t* it = ll.first;
 	//Iterate over the list
-	for (i = 1; i <= ll.elems; i++) {
+	for (i = 1; i < ll.elems; i++) {
 		if (it->elem == elem) {
 			*(cost) = i;
 			return SUCCESS;

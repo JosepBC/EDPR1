@@ -8,16 +8,16 @@
 #define OPERACIO_NO_PERMITIDA 7
 
 typedef struct Node_t {
-	int elem;
-	struct Node_t *next, *previous;
+    int elem;
+    struct Node_t *next, *previous;
 }Node_t;
 
 typedef struct llista_encadenada {
-	int elems;
-	Node_t *pdi;
-	Node_t *first;
-	Node_t *last;
-	Node_t *ghost;
+    int elems;
+    Node_t *pdi;
+    Node_t *first;
+    Node_t *last;
+    Node_t *ghost;
 }llista_encadenada;
 
 extern int Crear(llista_encadenada* ll);
