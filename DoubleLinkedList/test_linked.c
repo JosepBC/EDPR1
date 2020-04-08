@@ -26,6 +26,9 @@ void treatReturn(char* str, int n) {
 	case 6:
 		printf("%s Memoria insuficient!\n\n", str);
 		break;
+	case 7:
+		printf("%s Operacio no permitida!\n\n", str);
+		break;
 	default:
 		printf("%s Algo ha anat malament!\n\n", str);
 		break;
@@ -84,7 +87,7 @@ int main(int argc, char const* argv[]) {
 			printf("Abans:\n");
 			Imprimir_Llista(llista);
 			ret = Avancar(&llista);
-			treatReturn("Avanar: ", ret);
+			treatReturn("Avancar: ", ret);
 			printf("Despres:\n");
 			Imprimir_Llista(llista);
 			break;

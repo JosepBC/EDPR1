@@ -5,7 +5,7 @@
 #define LLISTA_BUIDA 4
 #define ELEMENT_NO_CREAT 5
 #define MEMORIA_INSUFICIENT 6
-#define ERROR_INDETERMINAT 7
+#define OPERACIO_NO_PERMITIDA 7
 
 typedef struct Node_t {
 	int elem;
@@ -17,6 +17,7 @@ typedef struct llista_encadenada {
 	Node_t *pdi;
 	Node_t *first;
 	Node_t *last;
+	Node_t *ghost;
 }llista_encadenada;
 
 extern int Crear(llista_encadenada* ll);

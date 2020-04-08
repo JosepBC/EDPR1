@@ -29,46 +29,34 @@ int Destruir(llista_encadenada* ll) {
 	}
 
 	free(it);
+	free(ll->ghost);
 	ll->elems = 0;
 	return SUCCESS;
 }
 
 int Principi(llista_encadenada* ll) {
 	if (ll == NULL) return LLISTA_NO_CREADA;
-	ll->pdi = ll->first;
+	ll->pdi = ll->ghost;
 	return SUCCESS;
 }
 
 int Final(llista_encadenada* ll) {
 	if (ll == NULL) return LLISTA_NO_CREADA;
-	/*bool end;
-	Es_Final(*ll, &end);
-	while (!end) {
-		Avancar(ll);
-		Es_Final(*ll, &end);
-	}*/
 	ll->pdi = ll->last;
 	return SUCCESS;
 }
 
 int Avancar(llista_encadenada* ll) {
 	if (ll == NULL) return LLISTA_NO_CREADA;
-	//if (ll->pdi->next == NULL) return SUCCESS;
-	if (ll->pdi->next == NULL) { //Circular list
-		ll->pdi = ll->first;
-		return SUCCESS;
-	}
+	if (ll->pdi->next == NULL) return OPERACIO_NO_PERMITIDA;
+
 	ll->pdi = ll->pdi->next;
 	return SUCCESS;
 }
 
 int Retrocedir(llista_encadenada* ll) {
 	if (ll == NULL) return LLISTA_NO_CREADA;
-	//if (ll->pdi->previous == NULL) return SUCCESS;
-	if (ll->pdi->previous == NULL) { //Circular list
-		ll->pdi = ll->last;
-		return SUCCESS;
-	}
+	if (ll->pdi->previous == NULL) return OPERACIO_NO_PERMITIDA;
 
 	ll->pdi = ll->pdi->previous;
 	return SUCCESS;
@@ -105,6 +93,14 @@ int Inserir(llista_encadenada* ll, int elem) {
 		ll->first = newNode;
 		ll->last = newNode;
 		ll->pdi = newNode;
+
+		ll->ghost = (Node_t*)malloc(sizeof(Node_t));
+		if (ll->ghost == NULL) return MEMORIA_INSUFICIENT;
+
+		ll->ghost->elem = NULL;
+		ll->ghost->previous = NULL;
+		ll->ghost->next = ll->first;
+		ll->first->previous = ll->ghost;
 	}
 	else if (ll->pdi == ll->last) {
 		//#2: the pdi is the last element
@@ -114,10 +110,12 @@ int Inserir(llista_encadenada* ll, int elem) {
 	}
 	else {
 		//#3: Generic case
+		if (ll->pdi == ll->ghost) ll->first = newNode;
 		newNode->previous = ll->pdi;
 		newNode->next = ll->pdi->next;
 		ll->pdi->next->previous = newNode;
 		ll->pdi->next = newNode;
+		
 	}
 
 	ll->elems++;
@@ -129,10 +127,10 @@ int Esborrar(llista_encadenada* ll) {
 	//Node_t *pdiCpy = ll->pdi; //Copy of the pdi to free it after all
 	Node_t *pdiPrev = ll->pdi->previous; //Previous and next ptr, just to make it easy to read
 	Node_t *pdiNext = ll->pdi->next;
-	//The  pdi node has to be deleted, 4 cases
+	//The  pdi node has to be deleted, 5 cases
 	if (ll->elems == 1) {
 		//#1: 1 elem in the list
-		free(ll->first); 
+		free(ll->first);
 	}
 	else if (ll->pdi == ll->first) {
 		//#2: the pdi is the first element
@@ -148,8 +146,12 @@ int Esborrar(llista_encadenada* ll) {
 		free(ll->pdi);
 		ll->pdi = ll->first; //The new PDI is the first element, design desicion
 	}
+	else if (ll->pdi == ll->ghost) {
+		//#4: the pdi is the ghost
+		return OPERACIO_NO_PERMITIDA;
+	}
 	else {
-		//#4: Generic case
+		//#5: Generic case
 		pdiPrev->next = pdiNext;
 		pdiNext->previous = pdiPrev;
 		free(ll->pdi);
@@ -213,7 +215,7 @@ int Imprimir_Llista(llista_encadenada ll) {
 			printf("Element numero: %i es: %i\n", i, it->elem);
 			it = it->next;
 		}
-		printf("List backwards:\n");
+		printf("\nList backwards:\n");
 		it = ll.last;
 		for (int i = ll.elems - 1; i >= 0; i--) {
 			printf("Element numero: %i es: %i\n", i, it->elem);

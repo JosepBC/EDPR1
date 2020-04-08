@@ -1,4 +1,3 @@
 ﻿  linked_list.c
-  test_linked.c
-  Generando código...
-  DoubleLinkedList.vcxproj -> D:\Uni\OneDrive - URV\GEI\Segon\ED\PR1\DoubleLinkedList\Debug\DoubleLinkedList.exe
+D:\Uni\OneDrive - URV\GEI\Segon\2n Q\ED\PR1\DoubleLinkedList\linked_list.c(100,25): warning C4047: '=': 'int' es distinto en los niveles de direccionamiento indirecto de 'void *'
+  DoubleLinkedList.vcxproj -> D:\Uni\OneDrive - URV\GEI\Segon\2n Q\ED\PR1\DoubleLinkedList\Debug\DoubleLinkedList.exe
