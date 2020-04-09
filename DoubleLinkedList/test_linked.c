@@ -262,8 +262,8 @@ void algorithmicCost() {
         }
 
         for (int i = 0; i < 1000; i++) {
-            //Search 1000 times random numbers, get the iteration number and time spent
-            rnd = (int)ignuin(1, 4 * size);
+            //Search 1000 times random numbers, get the iteration number and store it to the vector to calculete de avg after
+            rnd = (int)ignuin(1, 2 * size);
 
             ret = Cost_Buscar(list, rnd, &iterations);
             treatReturn("Cost Buscar: ", ret, false);
