@@ -197,34 +197,18 @@ int average(int* v, int size) {
     return sum / size;
 }
 
-double calculateSD(llista_encadenada *list) {
-    double mean, sd = 0.0, sum = 0.0;
-    int ret, elem;
-    Principi(list);
-    for (int i = 0; i < list->elems; i++) {
-        ret = Avancar(list);
-        treatReturn("Avancar: ", ret, false);
-
-        ret = Actual(*list, &elem);
-        treatReturn("Actual: ", ret, false);
-
-        sum += (double)elem;
-    }
-    mean = sum / list->elems;
-
-    Principi(list);
-    for (int i = 0; i < list->elems; i++) {
-        ret = Avancar(list);
-        treatReturn("Avancar: ", ret, false);
-
-        ret = Actual(*list, &elem);
-        treatReturn("Actual: ", ret, false);
-
-
-        sd += pow(elem - mean, 2);
+double calculateSD(int *data, int dataSize) {
+    double sum = 0.0, mean, SD = 0.0;
+    for (int i = 0; i < dataSize; ++i) {
+        sum += (double)data[i];
     }
 
-    return sqrt(sd / list->elems);
+    mean = sum / dataSize;
+
+    for (int i = 0; i < dataSize; ++i)
+        SD += pow((double)data[i] - mean, 2);
+
+    return sqrt(SD / dataSize - 1);
 }
 
 void algorithmicCost() {
@@ -274,7 +258,7 @@ void algorithmicCost() {
         avgIterations = average(iterationsVect, 1000);
         printf("Average iterations: %i\n", avgIterations);
 
-        stdev = calculateSD(&list);
+        stdev = calculateSD(iterationsVect, 1000);
 
         fprintf(data, "%i\t%i\t%g\n", size, avgIterations, stdev);
 
