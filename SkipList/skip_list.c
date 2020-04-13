@@ -17,6 +17,7 @@ int Crear(skip_list *sl) {
 	return SUCCESS;
 }
 
+//Frees a column from bottom to top
 void freeCol(Node_t *n) {
 	while (n->top != NULL) {
 		n = n->top;
@@ -155,15 +156,15 @@ int Inserir(skip_list *sl, int elem) {
 	return SUCCESS;
 }
 
-//Deletes the elem passed by parameter, this elem MUST be the highest elem in it's tower
-int deleteElem(Node_t *n) {
-	if (n->top != NULL) return OPERACIO_NO_PERMITIDA;
+//Deletes the elem passed by parameter, this elem MUST be the lowest elem in it's tower
+int deleteLowElem(Node_t *n) {
+	if (n->bottom != NULL) return OPERACIO_NO_PERMITIDA;
 
-	Node_t *nPrev = n->left, *nPost = n->right, *nBot = n->bottom;
+	Node_t *nPrev = n->left, *nPost = n->right, *nTop = n->top;
 
 	nPrev->right = nPost;
 	if (nPost != NULL) nPost->left = nPrev;
-	if (nBot != NULL) nBot->top = NULL;
+	if (nTop != NULL) nTop->bottom = NULL;
 	free(n);
 	return SUCCESS;
 }
@@ -183,8 +184,17 @@ void deleteLayers(skip_list *sl) {
 		act = next;
 		sl->height--;
 		sl->elemNumber--;
-		Imprimir_Llista(*sl);
 	}
+}
+
+void deleteCol(skip_list *sl, Node_t *actRow) {
+	Node_t *nextRow = actRow->top;
+	do{
+		nextRow = actRow->top;
+		deleteLowElem(actRow);
+		actRow = nextRow;
+		sl->elemNumber--;
+	} while (nextRow != NULL);
 }
 
 int Esborrar(skip_list *sl, int elem) {
@@ -192,21 +202,19 @@ int Esborrar(skip_list *sl, int elem) {
 	if (sl->elemNumber == 0) return LLISTA_BUIDA;
 
 	Node_t *leftElem = sl->topLeft;
-	Node_t *act = leftElem;
-	Node_t *next = leftElem;
+	Node_t *lowest = leftElem;
+	Node_t *actCol = leftElem;
+	Node_t *nextCol = leftElem;
 	 
 	leftElem = insertPos(sl, elem);
-	act = leftElem->right;
-	while (act->top != NULL) {
-		act = act->top;
-	}
-
-	while (next != NULL) {
-		next = act->bottom;
-		deleteElem(act);
-		act = next;
-		sl->elemNumber--;
-		Imprimir_Llista(*sl);
+	lowest = leftElem->right;
+	if (lowest == NULL || lowest->elem != elem) return OPERACIO_NO_PERMITIDA;
+	while (lowest->left != NULL && lowest->left->elem == elem) lowest = lowest->left;
+	actCol = lowest;
+	while (actCol != NULL && actCol->elem == elem) {
+		nextCol = actCol->right;
+		deleteCol(sl, actCol);
+		actCol = nextCol;
 	}
 
 	//Delete unused layers
