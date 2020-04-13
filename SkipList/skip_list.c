@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include "skip_list.h"
-#include "random.h"
 
 int Crear(skip_list *sl) {
 	sl->topLeft = (Node_t*)malloc(sizeof(Node_t));
@@ -62,9 +61,8 @@ Node_t* insertPos(skip_list *sl, int elem) {
 //Inserts newNode after prev
 void insertAfter(skip_list *sl, Node_t *newNode, Node_t *prev) {
 	//Right and left pointers
-	Node_t* prevRight = prev->right;
-	Node_t* prevLeft = prev->left;
-	Imprimir_Llista(*sl);
+	Node_t *prevRight = prev->right;
+	Node_t *prevLeft = prev->left;
 	if (prevRight != NULL) prevRight->left = newNode;
 	newNode->left = prev;
 	prev->right = newNode;
@@ -92,7 +90,7 @@ void insertAfter(skip_list *sl, Node_t *newNode, Node_t *prev) {
 
 //Creates a new layer under sl->topLeft
 int newLayer(skip_list *sl) {
-	Node_t* newNode = (Node_t*)malloc(sizeof(Node_t));
+	Node_t *newNode = (Node_t*)malloc(sizeof(Node_t));
 	if (newNode == NULL) return MEMORIA_INSUFICIENT;
 
 	sl->height++;
@@ -111,7 +109,7 @@ int Inserir(skip_list *sl, int elem) {
 	if (sl == NULL) return LLISTA_NO_CREADA;
 	Node_t* newNode = (Node_t*)malloc(sizeof(Node_t));
 	if (newNode == NULL) return MEMORIA_INSUFICIENT;
-
+	
 	srand(time(NULL));
 
 	newNode->elem = elem;
@@ -143,7 +141,6 @@ int Inserir(skip_list *sl, int elem) {
 		}
 
 		prev = prev->top;
-		Imprimir_Llista(*sl);
 		newNode = (Node_t *)malloc(sizeof(Node_t));
 		if (newNode == NULL) return MEMORIA_INSUFICIENT;
 
@@ -153,7 +150,6 @@ int Inserir(skip_list *sl, int elem) {
 		newNode->left = NULL;
 		newNode->bottom = NULL;
 		insertAfter(sl, newNode, prev);
-		Imprimir_Llista(*sl);
 	}
 	
 	return SUCCESS;

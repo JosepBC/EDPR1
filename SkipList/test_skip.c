@@ -2,7 +2,10 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <math.h>
+#include "random.h"
 #include "skip_list.h"
+
+#define FILE_NAME "searchRawData.csv"
 
 void treatReturn(char *str, int n, bool debug) {
     switch (n) {
@@ -156,7 +159,60 @@ double calculateSD(int *data, int dataSize) {
 }
 
 void algorithmicCost() {
-    printf("TODO\n");
+    skip_list list;
+    int rnd, iterations, ret, avgIterations;
+    long seed1, seed2;
+    int iterationsVect[1000];//Stores the number of iterations of each search, to calculate de avg
+    double stdev;
+
+    FILE *data = fopen(FILE_NAME, "w");
+    if (data == NULL) {
+        printf("El fitxer no s'ha pogut obrir, abortant....");
+        exit(EXIT_FAILURE);
+    }
+
+    fprintf(data, "Dim\tAvg Iterations\tStandard Desviation\n");
+
+    phrtsd("HelloMyNameIsJosep", &seed1, &seed2);
+    setall(seed1, seed2);
+
+    for (int size = 1000; size <= 50000; size += 1000) {
+        ret = Crear(&list);
+        treatReturn("Crear: ", ret, false);
+
+        printf("Starting size %i\n", size);
+        //List full of randoms betwen 1 and 2 * size
+        for (int i = 0; i < size; i++) {
+            rnd = (int)ignuin(1, 2 * size);
+
+            ret = Inserir(&list, rnd);
+            treatReturn("Inserir: ", ret, false);
+        }
+
+        for (int i = 0; i < 1000; i++) {
+            //Search 1000 times random numbers, get the iteration number and store it to the vector to calculete de avg after
+            rnd = (int)ignuin(1, 2 * size);
+
+            ret = Cost_Buscar(list, rnd, &iterations);
+            treatReturn("Cost Buscar: ", ret, false);
+
+            iterationsVect[i] = iterations;
+        }
+
+        avgIterations = average(iterationsVect, 1000);
+        printf("Average iterations: %i\n", avgIterations);
+
+        stdev = calculateSD(iterationsVect, 1000);
+
+        fprintf(data, "%i\t%i\t%g\n", size, avgIterations, stdev);
+
+        printf("Size %i DONE!\n\n", size);
+
+        ret = Destruir(&list);
+        treatReturn("Destruir", ret, false);
+    }
+
+    fclose(data);
 }
 
 int main(int argc, char const* argv[]) {
