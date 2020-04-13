@@ -1,8 +1,3 @@
 ﻿  skip_list.c
-D:\Uni\OneDrive - URV\GEI\Segon\2n Q\ED\PR1\SkipList\skip_list.c(52,15): warning C4047: 'función': 'skip_list *' es distinto en los niveles de direccionamiento indirecto de 'skip_list **'
-D:\Uni\OneDrive - URV\GEI\Segon\2n Q\ED\PR1\SkipList\skip_list.c(52,15): warning C4024: 'insertPos': tipos distintos para el parámetro formal y el parámetro real 1
-D:\Uni\OneDrive - URV\GEI\Segon\2n Q\ED\PR1\SkipList\skip_list.c(10): warning C4716: 'Crear': debe devolver un valor
-D:\Uni\OneDrive - URV\GEI\Segon\2n Q\ED\PR1\SkipList\skip_list.c(59): warning C4715: 'Inserir': no todas las rutas de acceso de control devuelven un valor
-D:\Uni\OneDrive - URV\GEI\Segon\2n Q\ED\PR1\SkipList\skip_list.c(64): warning C4715: 'Esborrar': no todas las rutas de acceso de control devuelven un valor
-D:\Uni\OneDrive - URV\GEI\Segon\2n Q\ED\PR1\SkipList\skip_list.c(15): warning C4715: 'Destruir': no todas las rutas de acceso de control devuelven un valor
+D:\Uni\OneDrive - URV\GEI\Segon\2n Q\ED\PR1\SkipList\skip_list.c(116,18): warning C4244: 'función': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
   SkipList.vcxproj -> D:\Uni\OneDrive - URV\GEI\Segon\2n Q\ED\PR1\SkipList\Debug\SkipList.exe

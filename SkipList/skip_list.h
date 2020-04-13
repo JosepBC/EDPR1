@@ -25,3 +25,4 @@ extern int Esborrar(skip_list* sl, int elem);
 extern int Longitud(skip_list sl, int* lon);
 extern int Buscar(skip_list sl, int elem, bool* trobat);
 extern int Cost_Buscar(skip_list sl, int elem, int* cost);
+extern void Imprimir_Llista(skip_list sl);
