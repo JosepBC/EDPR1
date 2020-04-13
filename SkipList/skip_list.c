@@ -177,12 +177,13 @@ void deleteLayer(Node_t *n) {
 
 void deleteLayers(skip_list *sl) {
 	Node_t *act = sl->topLeft->bottom, *next;
-	while (act->right == NULL) {
+	while (act != NULL && act->right == NULL) {
 		next = act->bottom;
 		deleteLayer(act);
 		act = next;
 		sl->height--;
 		sl->elemNumber--;
+		Imprimir_Llista(*sl);
 	}
 }
 
@@ -205,6 +206,7 @@ int Esborrar(skip_list *sl, int elem) {
 		deleteElem(act);
 		act = next;
 		sl->elemNumber--;
+		Imprimir_Llista(*sl);
 	}
 
 	//Delete unused layers
