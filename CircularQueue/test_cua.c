@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "cua.h"
 
-/*
+
 void treatReturn(char* str, int n) {
 	switch (n) {
 	case 0:
@@ -94,4 +94,3 @@ int main(int argc, char const* argv[]) {
 	printf("-----------------------------------------------------\n");
 	return 1;
 }
-*/
