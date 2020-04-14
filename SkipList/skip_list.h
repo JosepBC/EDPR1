@@ -6,7 +6,6 @@
 #define ELEMENT_NO_CREAT 5
 #define MEMORIA_INSUFICIENT 6
 #define OPERACIO_NO_PERMITIDA 7
-#define ERROR_ESBORRAR 8
 
 typedef struct Node_t {
     int elem;

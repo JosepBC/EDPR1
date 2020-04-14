@@ -47,7 +47,7 @@ int Destruir(skip_list *sl) {
 	return SUCCESS;
 }
 
-//With this function I get in insPos the node that goes at the left side of the new node and it's in the last layer
+//With this function I get the node that goes at the left side of the new node and it's in the last layer
 Node_t* insertPos(skip_list *sl, int elem) {
 	Node_t *insPos;
 	insPos = sl->topLeft;
@@ -107,6 +107,7 @@ int newLayer(skip_list *sl) {
 }
 
 int Inserir(skip_list *sl, int elem) {
+	if(elem == 0) return OPERACIO_NO_PERMITIDA;
 	if (sl == NULL) return LLISTA_NO_CREADA;
 	Node_t* newNode = (Node_t*)malloc(sizeof(Node_t));
 	if (newNode == NULL) return MEMORIA_INSUFICIENT;
@@ -187,7 +188,9 @@ void deleteLayers(skip_list *sl) {
 	}
 }
 
+//Deletes a column from bottom to top
 void deleteCol(skip_list *sl, Node_t *actRow) {
+	if (n->bottom != NULL) return OPERACIO_NO_PERMITIDA;
 	Node_t *nextRow = actRow->top;
 	do{
 		nextRow = actRow->top;

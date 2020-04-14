@@ -33,9 +33,6 @@ void treatReturn(char *str, int n, bool debug) {
     case 7:
         printf("%s Operacio no permitida!\n\n", str);
         break;
-    case 8:
-        printf("%s Error al esborrar!\n\n", str);
-        break;
     default:
         printf("%s Algo ha anat malament!\n\n", str);
         break;
