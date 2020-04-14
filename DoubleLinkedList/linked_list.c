@@ -124,7 +124,6 @@ int Inserir(llista_encadenada* ll, int elem) {
 
 int Esborrar(llista_encadenada* ll) {
 	if (ll->elems == 0) return LLISTA_BUIDA;
-	//Node_t *pdiCpy = ll->pdi; //Copy of the pdi to free it after all
 	Node_t *pdiPrev = ll->pdi->previous; //Previous and next ptr, just to make it easy to read
 	Node_t *pdiNext = ll->pdi->next;
 	//The  pdi node has to be deleted, 5 cases
@@ -188,7 +187,7 @@ int Cost_Buscar(llista_encadenada ll, int elem, int* cost) {
 	int i;
 	Node_t* it = ll.first;
 	//Iterate over the list
-	for (i = 1; i < ll.elems; i++) {
+	for (i = 1; i <= ll.elems; i++) {
 		if (it->elem == elem) {
 			*(cost) = i;
 			return SUCCESS;
