@@ -189,8 +189,8 @@ void deleteLayers(skip_list *sl) {
 }
 
 //Deletes a column from bottom to top
-void deleteCol(skip_list *sl, Node_t *actRow) {
-	if (n->bottom != NULL) return OPERACIO_NO_PERMITIDA;
+int deleteCol(skip_list *sl, Node_t *actRow) {
+	if (actRow->bottom != NULL) return OPERACIO_NO_PERMITIDA;
 	Node_t *nextRow = actRow->top;
 	do{
 		nextRow = actRow->top;
@@ -198,6 +198,8 @@ void deleteCol(skip_list *sl, Node_t *actRow) {
 		actRow = nextRow;
 		sl->elemNumber--;
 	} while (nextRow != NULL);
+
+	return SUCCESS;
 }
 
 int Esborrar(skip_list *sl, int elem) {
